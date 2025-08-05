@@ -1,6 +1,6 @@
 import { type TodoList } from '../types'
 
-const API_URL = 'https://api.jsonbin.io/v3/b/68899972ae596e708fbdef47'
+const API_URL = 'https://api.jsonbin.io/v3/b/689244bfae596e708fc26019'
 
 interface Todo {
   id: string
@@ -10,7 +10,11 @@ interface Todo {
 }
 
 export const fetchTodos = async (): Promise<Todo[]> => {
-  const res = await fetch(API_URL)
+  const res = await fetch(API_URL, {
+    headers: {
+      'X-Master-Key': import.meta.env.VITE_API_BIN_KEY
+    }
+  })
   if (!res.ok) {
     console.error('Error fetching todos')
     return []
